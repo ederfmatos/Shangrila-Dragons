@@ -6,216 +6,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo2"
-    tools:context="com.spectron.dragoesdeshangrila.MainActivity">
+    tools:context="com.spectron.dragoesdeshangrila.activities.MainActivity">
+
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao7"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="300dp"
-        android:background="#00FFFFFF"
-        android:contentDescription="7"
-        android:onClick="onDragonClick"
+        android:id="@+id/appCompatImageView"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dragaoverde" />
+        app:srcCompat="@drawable/wallpaper" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao3"
-        style="@style/Dragao_verde"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="200dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="3"
-        android:forceDarkAllowed="true"
-        android:onClick="onDragonClick"
-        android:theme="@style/AlertDialog.AppCompat"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:onClick="showPlayActivity"
+        android:src="@drawable/btnjogar"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:srcCompat="@drawable/btnjogar" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao4"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="234dp"
-        android:layout_marginTop="200dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="4"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao2"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="200dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="2"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao5"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="200dp"
-        android:contentDescription="5"
-        android:contextClickable="true"
-        android:filterTouchesWhenObscured="false"
-        android:onClick="onDragonClick"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dragaoverde" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao1"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="200dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="1"
-        android:labelFor="@id/dragao7"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao11"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="400dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="11"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao6"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="300dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="6"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao9"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="234dp"
-        android:layout_marginTop="300dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="9"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao10"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="300dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="10"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao14"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="234dp"
-        android:layout_marginTop="400dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="14"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragaovermelho"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="400dp"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dragaovermelho" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao13"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="400dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="13"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao12"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="400dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="12"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/dragao8"
-        android:layout_width="69dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="300dp"
-        app:srcCompat="@drawable/dragaoverde"
-        android:contentDescription="8"
-        android:onClick="onDragonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-
-    <ImageButton
-        android:id="@+id/buttonPronto"
-        android:layout_width="135dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="50dp"
-        android:clickable="false"
-        android:onClick="removeDragons"
-        android:saveEnabled="false"
-        android:scaleType="centerCrop"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="84dp"
+        android:onClick="showAboutPage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/pronto" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/logo"
-        android:layout_width="187dp"
-        android:layout_height="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/wallpaper" />
+        app:srcCompat="@drawable/btnsobre" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

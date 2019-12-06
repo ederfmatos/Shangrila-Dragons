@@ -1,4 +1,6 @@
-package com.spectron.dragoesdeshangrila;
+package com.spectron.dragoesdeshangrila.activities;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -6,8 +8,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.spectron.dragoesdeshangrila.R;
 import com.spectron.dragoesdeshangrila.enumerations.LevelEnum;
 import com.spectron.dragoesdeshangrila.model.DragonModel;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MainActivity extends AppCompatActivity {
+public class PlayActivity extends AppCompatActivity {
 
     private boolean isPlayerChance = true;
 
@@ -28,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_play);
 
         mediaPlayer = MediaPlayer.create(this, R.raw.fundojogo);
+        mediaPlayer.start();
         dragons = new ArrayList<>();
 
         for (int i = 1; i < 15; i++) {
@@ -143,6 +145,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void youLose() {
-        dragons.stream().forEach(DragonModel::setVisible);
+        dragons.forEach(DragonModel::setVisible);
     }
 }
