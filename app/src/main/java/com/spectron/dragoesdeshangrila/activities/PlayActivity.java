@@ -1,36 +1,34 @@
 package com.spectron.dragoesdeshangrila.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.spectron.dragoesdeshangrila.R;
-import com.spectron.dragoesdeshangrila.enumerations.LevelEnum;
 import com.spectron.dragoesdeshangrila.model.DragonModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-public class PlayActivity extends AppCompatActivity {
+public abstract class PlayActivity extends AppCompatActivity {
 
-    private boolean isPlayerChance = true;
+    protected MediaPlayer mediaPlayer;
 
-    private MediaPlayer mediaPlayer;
-
-    private List<DragonModel> dragons;
-    private Handler handler = new Handler();
-    private LevelEnum level = LevelEnum.EASY;
+    protected List<DragonModel> dragons;
+    protected Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play);
+        setContentView(R.layout.activity_singleplayer);
+    }
 
+    protected final void init() {
         mediaPlayer = MediaPlayer.create(this, R.raw.fundojogo);
         mediaPlayer.start();
         dragons = new ArrayList<>();
@@ -55,71 +53,61 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
-    public void removeDragons(View view) {
-        if (!hasSelected() || !isPlayerChance) return;
+    public abstract void onClickButtonRemove(View view);
 
-        removeDragons();
+    protected abstract void onEndDragons();
 
-        if (getDragonsVisible() > 0) {
-            isPlayerChance = false;
-            vezdamaquina();
-        } else {
-            youWin();
-        }
-
-        dragons.forEach(dragon -> dragon.setSelected(false));
+    protected void showEndMessage(String title, String message) {
+//        new TTFancyGifDialog.Builder(SinglePlayerActivity.this)
+//                .setTitle(title)
+//                .setMessage(message)
+//                .setPositiveBtnText("Sair")
+//                .setPositiveBtnBackground("#004d40")
+//                .setNegativeBtnText("Reiniciar jogo")
+//                .setNegativeBtnBackground("#c1272d")
+//                .setGifResource(R.drawable.wallpaper)
+//                .isCancellable(true)
+//                .OnPositiveClicked(this::finish)
+//                .OnNegativeClicked(this::recreate)
+//                .build();
     }
 
-    private void vezdamaquina() {
-        int qdtRemove = level.getAction().get(getDragonsVisible());
-
-        maquinaRemove(qdtRemove);
-
-        if (getDragonsVisible() == 0) {
-            isPlayerChance = true;
-
-            handler.postDelayed(this::youLose, 200);
-        }
-    }
-
-    private DragonModel getDragonVisible() {
-        return dragons.stream().filter(DragonModel::isVisible).findFirst().orElse(null);
-    }
-
-    private void maquinaRemove(int quantity) {
-        List<DragonModel> dragonsRemove = new ArrayList<>();
-
-        while (quantity > 0) {
-            DragonModel dragon = getDragonVisible();
-            dragon.setSelected(true);
-            dragonsRemove.add(dragon);
-            quantity--;
-        }
-
-        handler.postDelayed(() -> {
-            for (DragonModel dragon : dragonsRemove) {
-                dragon.setInvisible();
-            }
-
-            isPlayerChance = true;
-            Toast.makeText(this, "Sua vez", Toast.LENGTH_SHORT).show();
-        }, 2000);
-    }
-
-    private boolean hasSelected() {
+    protected boolean hasSelected() {
         return dragons.stream().anyMatch(DragonModel::isSelected);
     }
 
-    private boolean canSelect() {
+    protected boolean canSelect() {
         return ((Long) dragons.stream().filter(dragonModel -> dragonModel.isSelected() && dragonModel.isVisible()).count()).intValue() < 3;
     }
 
-    private int getDragonsVisible() {
+    protected Integer getQuantityDragonsVisible() {
         return ((Long) dragons.stream().filter(DragonModel::isVisible).count()).intValue();
     }
 
-    public void removeDragons() {
+    protected void removeDragons() {
         dragons.stream().filter(dragon -> dragon.isSelected() && dragon.isVisible()).forEach(dragon -> dragon.setInvisible().setSelected(false));
+
+        if(getQuantityDragonsVisible() == 0) {
+            onEndDragons();
+        }
+    }
+
+    protected void startLoserMusic() {
+        startMusic(R.raw.lose);
+    }
+
+    protected void startWinnerMusic() {
+        startMusic(R.raw.winner);
+    }
+
+    private void startMusic(int music) {
+        mediaPlayer.stop();
+        mediaPlayer = MediaPlayer.create(this, music);
+        mediaPlayer.start();
+    }
+
+    protected List<DragonModel> getDragonVisible(int limit) {
+        return dragons.stream().filter(DragonModel::isVisible).limit(limit).collect(Collectors.toList());
     }
 
     @Override
@@ -139,12 +127,5 @@ public class PlayActivity extends AppCompatActivity {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
         }
-    }
-
-    private void youWin() {
-    }
-
-    private void youLose() {
-        dragons.forEach(DragonModel::setVisible);
     }
 }
