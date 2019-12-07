@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo2"
-    tools:context="com.spectron.dragoesdeshangrila.activities.MainActivity">
-
+    tools:context=".activities.PlayActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/dragao8"
@@ -15,7 +14,6 @@
         android:layout_height="83dp"
         android:layout_marginStart="168dp"
         android:layout_marginTop="340dp"
-        android:contentDescription="8"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,7 +26,6 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="340dp"
         android:background="#00FFFFFF"
-        android:contentDescription="7"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +36,6 @@
         style="@style/Dragao_verde"
         android:layout_marginStart="168dp"
         android:layout_marginTop="240dp"
-        android:contentDescription="3"
         android:forceDarkAllowed="true"
         android:onClick="onDragonClick"
         android:theme="@style/AlertDialog.AppCompat"
@@ -53,7 +49,6 @@
         android:layout_height="83dp"
         android:layout_marginStart="240dp"
         android:layout_marginTop="240dp"
-        android:contentDescription="4"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -65,7 +60,6 @@
         android:layout_height="83dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="240dp"
-        android:contentDescription="2"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -77,7 +71,6 @@
         android:layout_height="83dp"
         android:layout_marginStart="308dp"
         android:layout_marginTop="240dp"
-        android:contentDescription="5"
         android:contextClickable="true"
         android:filterTouchesWhenObscured="false"
         android:onClick="onDragonClick"
@@ -92,7 +85,6 @@
         android:layout_height="83dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="240dp"
-        android:contentDescription="1"
         android:labelFor="@id/dragao7"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +97,6 @@
         android:layout_height="83dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="440dp"
-        android:contentDescription="11"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -117,7 +108,6 @@
         android:layout_height="83dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="340dp"
-        android:contentDescription="6"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -129,7 +119,6 @@
         android:layout_height="83dp"
         android:layout_marginStart="240dp"
         android:layout_marginTop="340dp"
-        android:contentDescription="9"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -141,7 +130,6 @@
         android:layout_height="83dp"
         android:layout_marginStart="308dp"
         android:layout_marginTop="340dp"
-        android:contentDescription="10"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -153,7 +141,6 @@
         android:layout_height="83dp"
         android:layout_marginStart="240dp"
         android:layout_marginTop="440dp"
-        android:contentDescription="14"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -176,7 +163,6 @@
         android:layout_height="83dp"
         android:layout_marginStart="168dp"
         android:layout_marginTop="440dp"
-        android:contentDescription="13"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -188,25 +174,10 @@
         android:layout_height="83dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="440dp"
-        android:contentDescription="12"
         android:onClick="onDragonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/dragaoverde" />
-
-    <ImageButton
-        android:id="@+id/buttonPronto"
-        android:layout_width="135dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="50dp"
-        android:clickable="false"
-        android:onClick="removeDragons"
-        android:saveEnabled="false"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/pronto" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="0dp"
@@ -215,5 +186,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/wallpaper" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView"
+        android:layout_width="139dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="68dp"
+        android:onClick="onClickButtonRemove"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/pronto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

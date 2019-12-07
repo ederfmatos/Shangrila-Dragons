@@ -1,22 +1,31 @@
 package com.spectron.dragoesdeshangrila.activities;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog;
 import com.spectron.dragoesdeshangrila.R;
+import com.spectron.dragoesdeshangrila.components.SpectronDialog;
+import com.spectron.dragoesdeshangrila.enumerations.LevelEnum;
+
+import java.util.List;
 
 import p32929.officeaboutlib.Others.OfficeAboutHelper;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MediaPlayer mediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.fundomenu);
+        mediaPlayer.start();
     }
 
     public void showAboutPage(View view) {
@@ -24,24 +33,41 @@ public class MainActivity extends AppCompatActivity {
         aboutPage.showAboutActivity();
     }
 
-    public void showPlayActivity(View view) {
-        new TTFancyGifDialog.Builder(MainActivity.this)
-                .setTitle("Dragões de Shangrila")
-                .setMessage("Selecione o tipo de partida")
-                .setPositiveBtnText("Multiplayer")
-                .setPositiveBtnBackground("#004d40")
-                .setNegativeBtnText("Singleplayer")
-                .setNegativeBtnBackground("#c1272d")
-                .setGifResource(R.drawable.wallpaper)      //pass your gif, png or jpg
-                .isCancellable(true)
-                .OnPositiveClicked(() -> showActivity(true))
-                .OnNegativeClicked(() -> showActivity(false))
-                .build();
+    public void multiplayer(View view) {
+        new SpectronDialog(this)
+                .setMessage(getString(R.string.digite_o_nome_dos_jogadores))
+                .setFirstTextHint(getString(R.string.jogador_1))
+                .setSecondTextHint(getString(R.string.jogador_2))
+                .setOnClickListener((players) -> showActivity(true, LevelEnum.HARD, players))
+                .show();
     }
 
-    private void showActivity(boolean isMultiplayer) {
-        Intent intent = new Intent(MainActivity.this, PlayActivity.class);
-        intent.putExtra("isMultiplayer", isMultiplayer);
-        startActivity(intent);
+    public void singlePlayer(View view) {
+        new SpectronDialog(this)
+                .setMessage(getString(R.string.selecione_um_nivel))
+                .setOptionsSelect(LevelEnum.values())
+                .onSelect((level) -> showActivity(false, LevelEnum.valueOf(level), null))
+                .show();
     }
+
+    private void showActivity(boolean isMultiplayer, LevelEnum level, List<String> players) {
+        Class<? extends AppCompatActivity> clazz = SinglePlayerActivity.class;
+
+        if(isMultiplayer) {
+            clazz = MultiPlayerActivity.class;
+        }
+
+        Intent intent = new Intent(MainActivity.this, clazz);
+        intent.putExtra("isMultiplayer", false);
+        intent.putExtra("level", level);
+
+        if(players != null) {
+            intent.putExtra("players", players.toArray());
+        }
+
+        startActivity(intent);
+
+        mediaPlayer.stop();
+    }
+
 }
