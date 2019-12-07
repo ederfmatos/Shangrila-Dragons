@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -62,16 +64,25 @@ public class SpectronDialog extends Dialog {
         setCancelable(true);
         setCanceledOnTouchOutside(true);
 
-        View.OnKeyListener onKeyListener = (v, keyCode, event) -> {
-            if(event.getKeyCode() != 4) {
-                this.validateFields();
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
-            return false;
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                validateFields();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         };
 
-        secondInput.setOnKeyListener(onKeyListener);
-        firstInput.setOnKeyListener(onKeyListener);
+        firstInput.addTextChangedListener(watcher);
+        secondInput.addTextChangedListener(watcher);
 
         if (optionsSelect != null && !optionsSelect.isEmpty()) {
             firstInput.setVisibility(View.GONE);
@@ -88,6 +99,8 @@ public class SpectronDialog extends Dialog {
         } else {
             spinner.setVisibility(View.GONE);
         }
+
+        validateFields();
     }
 
     public SpectronDialog setFirstTextHint(String message) {
@@ -110,7 +123,7 @@ public class SpectronDialog extends Dialog {
         return this;
     }
 
-    public <T> SpectronDialog setOptionsSelect(T [] list) {
+    public <T> SpectronDialog setOptionsSelect(T[] list) {
         this.optionsSelect = Arrays.asList(list);
         return this;
     }
@@ -137,7 +150,7 @@ public class SpectronDialog extends Dialog {
     }
 
     private void validateFields() {
-        findViewById(R.id.buttonOk).setEnabled(!(firstInput.getText().toString().isEmpty() && secondInput.getText().toString().isEmpty()));
+        findViewById(R.id.buttonOk).setEnabled(!(firstInput.getText().toString().isEmpty() || secondInput.getText().toString().isEmpty()));
     }
 
 }

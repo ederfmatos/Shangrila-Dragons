@@ -8,4 +8,6 @@
     <string name="digite_o_nome_dos_jogadores">Digite o nome dos jogadores</string>
     <string name="jogador_1">Jogador 1</string>
     <string name="jogador_2">Jogador 2</string>
+    <string name="venceu">venceu!</string>
+    <string name="vez_de">Vez de:</string>
 </resources>

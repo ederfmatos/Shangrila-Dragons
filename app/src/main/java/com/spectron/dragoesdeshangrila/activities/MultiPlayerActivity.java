@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.spectron.dragoesdeshangrila.R;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -20,18 +22,27 @@ public class MultiPlayerActivity extends PlayActivity {
         super.init();
         players = Arrays.asList((String[]) Objects.requireNonNull(getIntent().getExtras().get("players")));
         isChanceFirstPlayer = true;
+        setCurrentPlayer();
     }
 
     @Override
     public void onClickButtonRemove(View view) {
-        isChanceFirstPlayer = !isChanceFirstPlayer;
         removeDragons();
+        isChanceFirstPlayer = !isChanceFirstPlayer;
+        setCurrentPlayer();
     }
 
     @Override
     protected void onEndDragons() {
-        String winner = players.get(isChanceFirstPlayer ? 1 : 0);
-        Toast.makeText(this, winner + " venceu!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getCurrentPlayer() + " " + getString(R.string.venceu), Toast.LENGTH_LONG).show();
+    }
+
+    private String getCurrentPlayer() {
+        return players.get(isChanceFirstPlayer ? 0 : 1);
+    }
+
+    private void setCurrentPlayer() {
+        setPlayerName(getString(R.string.vez_de) + getCurrentPlayer());
     }
 
 }

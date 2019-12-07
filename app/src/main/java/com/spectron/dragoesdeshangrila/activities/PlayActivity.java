@@ -1,10 +1,13 @@
 package com.spectron.dragoesdeshangrila.activities;
 
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.spectron.dragoesdeshangrila.R;
@@ -18,6 +21,8 @@ import java.util.stream.Collectors;
 public abstract class PlayActivity extends AppCompatActivity {
 
     protected MediaPlayer mediaPlayer;
+    private boolean isRunning;
+    protected TextView player;
 
     protected List<DragonModel> dragons;
     protected Handler handler = new Handler();
@@ -26,17 +31,23 @@ public abstract class PlayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singleplayer);
+
+        player = findViewById(R.id.player);
     }
 
     protected final void init() {
-        mediaPlayer = MediaPlayer.create(this, R.raw.fundojogo);
-        mediaPlayer.start();
+        if (isRunning) {
+            return;
+        }
+
+        startMusic(R.raw.fundojogo);
         dragons = new ArrayList<>();
 
         for (int i = 1; i < 15; i++) {
             int id = getResources().getIdentifier("dragao" + i, "id", getPackageName());
             dragons.add(new DragonModel(findViewById(id)));
         }
+        isRunning = true;
     }
 
     public void onDragonClick(View view) {
@@ -87,7 +98,7 @@ public abstract class PlayActivity extends AppCompatActivity {
     protected void removeDragons() {
         dragons.stream().filter(dragon -> dragon.isSelected() && dragon.isVisible()).forEach(dragon -> dragon.setInvisible().setSelected(false));
 
-        if(getQuantityDragonsVisible() == 0) {
+        if (getQuantityDragonsVisible() == 0) {
             onEndDragons();
         }
     }
@@ -101,13 +112,20 @@ public abstract class PlayActivity extends AppCompatActivity {
     }
 
     private void startMusic(int music) {
-        mediaPlayer.stop();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+        }
+
         mediaPlayer = MediaPlayer.create(this, music);
         mediaPlayer.start();
     }
 
     protected List<DragonModel> getDragonVisible(int limit) {
         return dragons.stream().filter(DragonModel::isVisible).limit(limit).collect(Collectors.toList());
+    }
+
+    protected final void setPlayerName(String playerName) {
+        player.setText(playerName);
     }
 
     @Override
@@ -127,5 +145,10 @@ public abstract class PlayActivity extends AppCompatActivity {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 }
