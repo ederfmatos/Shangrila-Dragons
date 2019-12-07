@@ -4,7 +4,9 @@ import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,11 +23,11 @@ import java.util.stream.Collectors;
 public abstract class PlayActivity extends AppCompatActivity {
 
     protected MediaPlayer mediaPlayer;
-    private boolean isRunning;
     protected TextView player;
 
     protected List<DragonModel> dragons;
     protected Handler handler = new Handler();
+    private Chronometer chronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +35,26 @@ public abstract class PlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_singleplayer);
 
         player = findViewById(R.id.player);
+
+        chronometer = findViewById(R.id.chronometer);
+
+        chronometer.setBase(SystemClock.elapsedRealtime() - 60);
+        chronometer.start();
+        chronometer.setOnChronometerTickListener(this::validateTime);
+    }
+
+    private void validateTime(Chronometer chronometer) {
+        String content = chronometer.getText().toString();
+        Integer seconds = Integer.parseInt(content.split(":")[1]);
+
+        if(seconds == 10) {
+            changeCurrentPlayer();
+            chronometer.stop();
+            onEndDragons();
+        }
     }
 
     protected final void init() {
-        if (isRunning) {
-            return;
-        }
-
         startMusic(R.raw.fundojogo);
         dragons = new ArrayList<>();
 
@@ -47,7 +62,6 @@ public abstract class PlayActivity extends AppCompatActivity {
             int id = getResources().getIdentifier("dragao" + i, "id", getPackageName());
             dragons.add(new DragonModel(findViewById(id)));
         }
-        isRunning = true;
     }
 
     public void onDragonClick(View view) {
@@ -64,9 +78,14 @@ public abstract class PlayActivity extends AppCompatActivity {
         }
     }
 
-    public abstract void onClickButtonRemove(View view);
+    public void onClickButtonRemove(View view) {
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
+    }
 
     protected abstract void onEndDragons();
+
+    protected abstract void changeCurrentPlayer();
 
     protected void showEndMessage(String title, String message) {
 //        new TTFancyGifDialog.Builder(SinglePlayerActivity.this)

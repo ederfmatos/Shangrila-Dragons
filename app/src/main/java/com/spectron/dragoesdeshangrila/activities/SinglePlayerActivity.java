@@ -26,6 +26,7 @@ public class SinglePlayerActivity extends PlayActivity {
     @Override
     public void onClickButtonRemove(View view) {
         if (!hasSelected() || !isPlayerChance) return;
+        super.onClickButtonRemove(view);
 
         isPlayerChance = false;
         removeDragons();
@@ -42,6 +43,11 @@ public class SinglePlayerActivity extends PlayActivity {
         } else {
             youWin();
         }
+    }
+
+    @Override
+    protected void changeCurrentPlayer() {
+        isPlayerChance = !isPlayerChance;
     }
 
     private void machineChance() {

@@ -27,14 +27,21 @@ public class MultiPlayerActivity extends PlayActivity {
 
     @Override
     public void onClickButtonRemove(View view) {
+        super.onClickButtonRemove(view);
+
         removeDragons();
-        isChanceFirstPlayer = !isChanceFirstPlayer;
-        setCurrentPlayer();
+        changeCurrentPlayer();
     }
 
     @Override
     protected void onEndDragons() {
         Toast.makeText(this, getCurrentPlayer() + " " + getString(R.string.venceu), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void changeCurrentPlayer() {
+        isChanceFirstPlayer = !isChanceFirstPlayer;
+        setCurrentPlayer();
     }
 
     private String getCurrentPlayer() {

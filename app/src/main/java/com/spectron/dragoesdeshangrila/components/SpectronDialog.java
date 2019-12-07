@@ -99,7 +99,6 @@ public class SpectronDialog extends Dialog {
         } else {
             spinner.setVisibility(View.GONE);
         }
-
         validateFields();
     }
 
@@ -150,6 +149,10 @@ public class SpectronDialog extends Dialog {
     }
 
     private void validateFields() {
+        if (optionsSelect != null && !optionsSelect.isEmpty()) {
+            return;
+        }
+
         findViewById(R.id.buttonOk).setEnabled(!(firstInput.getText().toString().isEmpty() || secondInput.getText().toString().isEmpty()));
     }
 
