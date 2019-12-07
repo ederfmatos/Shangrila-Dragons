@@ -1,5 +1,7 @@
 package com.spectron.dragoesdeshangrila.enumerations;
 
+import androidx.annotation.NonNull;
+
 import com.spectron.dragoesdeshangrila.interfaces.LevelOptionsInterface;
 import com.spectron.dragoesdeshangrila.levels.EasyLevel;
 import com.spectron.dragoesdeshangrila.levels.HardLevel;
@@ -21,4 +23,9 @@ public enum LevelEnum {
         return action;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return name();
+    }
 }
