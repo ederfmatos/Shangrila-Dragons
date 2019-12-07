@@ -10,19 +10,16 @@ public class DragonModel {
 
     private boolean selected;
     private boolean visible;
-    private Integer id;
     private View view;
 
     public DragonModel(View view) {
-        this.id = view.getId();
         this.view = view;
         this.visible = true;
     }
 
     public Integer getId() {
-        return id;
+        return view.getId();
     }
-
 
     public boolean isVisible() {
         return visible;
@@ -35,10 +32,6 @@ public class DragonModel {
 
     public void toggleSelection() {
         this.setSelected(!isSelected());
-    }
-
-    public void setVisible() {
-        this.visible = true;
     }
 
     public DragonModel setInvisible() {
