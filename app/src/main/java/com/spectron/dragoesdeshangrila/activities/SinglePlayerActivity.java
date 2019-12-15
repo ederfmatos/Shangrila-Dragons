@@ -22,7 +22,7 @@ public class SinglePlayerActivity extends PlayActivity {
 
     @Override
     public void onClickButtonRemove(View view) {
-        if (!hasSelected() || !players.isFirstPlayer()) return;
+        if (hasSelected() || !players.isFirstPlayer()) return;
         super.onClickButtonRemove(view);
 
         super.removeDragons();

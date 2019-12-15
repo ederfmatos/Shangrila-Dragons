@@ -96,7 +96,7 @@ public abstract class PlayActivity extends AppCompatActivity {
     }
 
     protected boolean hasSelected() {
-        return dragons.stream().anyMatch(DragonModel::isSelected);
+        return dragons.stream().noneMatch(DragonModel::isSelected);
     }
 
     private boolean canSelect() {

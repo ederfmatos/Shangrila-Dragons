@@ -21,7 +21,7 @@ public class MultiPlayerActivity extends PlayActivity {
 
     @Override
     public void onClickButtonRemove(View view) {
-        if(!super.hasSelected()) {
+        if(super.hasSelected()) {
             return;
         }
 
