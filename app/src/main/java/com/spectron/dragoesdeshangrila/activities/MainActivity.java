@@ -15,6 +15,8 @@ import java.util.List;
 
 import p32929.officeaboutlib.Others.OfficeAboutHelper;
 
+import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
+
 public class MainActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getWindow().setFlags(FLAG_LAYOUT_NO_LIMITS, FLAG_LAYOUT_NO_LIMITS);
 
         mediaPlayer = MediaPlayer.create(this, R.raw.fundomenu);
         mediaPlayer.start();

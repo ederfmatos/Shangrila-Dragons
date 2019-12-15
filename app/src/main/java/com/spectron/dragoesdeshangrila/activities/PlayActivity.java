@@ -1,66 +1,68 @@
 package com.spectron.dragoesdeshangrila.activities;
 
-import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Chronometer;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.spectron.dragoesdeshangrila.R;
+import com.spectron.dragoesdeshangrila.components.DialogEndGame;
 import com.spectron.dragoesdeshangrila.model.DragonModel;
+import com.spectron.dragoesdeshangrila.model.PlayersModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
+
 public abstract class PlayActivity extends AppCompatActivity {
 
     protected MediaPlayer mediaPlayer;
-    protected TextView player;
-
-    protected List<DragonModel> dragons;
     protected Handler handler = new Handler();
+    protected PlayersModel players;
+
+    private List<DragonModel> dragons;
     private Chronometer chronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singleplayer);
+        getWindow().setFlags(FLAG_LAYOUT_NO_LIMITS, FLAG_LAYOUT_NO_LIMITS);
 
-        player = findViewById(R.id.player);
+        players = new PlayersModel(findViewById(R.id.player));
 
         chronometer = findViewById(R.id.chronometer);
-
         chronometer.setBase(SystemClock.elapsedRealtime() - 60);
         chronometer.start();
         chronometer.setOnChronometerTickListener(this::validateTime);
     }
 
-    private void validateTime(Chronometer chronometer) {
-        String content = chronometer.getText().toString();
-        Integer seconds = Integer.parseInt(content.split(":")[1]);
-
-        if(seconds == 10) {
-            changeCurrentPlayer();
-            chronometer.stop();
-            onEndDragons();
-        }
-    }
-
-    protected final void init() {
+    protected final void init(String firstPlayerName, String secondPlayerName) {
         startMusic(R.raw.fundojogo);
         dragons = new ArrayList<>();
+        players.setPlayers(firstPlayerName, secondPlayerName);
 
         for (int i = 1; i < 15; i++) {
             int id = getResources().getIdentifier("dragao" + i, "id", getPackageName());
             dragons.add(new DragonModel(findViewById(id)));
+        }
+    }
+
+    private void validateTime(Chronometer chronometer) {
+        String content = chronometer.getText().toString();
+        int seconds = Integer.parseInt(content.split(":")[1]);
+
+        if (seconds == 10) {
+            players.changePlayer();
+            chronometer.stop();
+            onEndDragons();
         }
     }
 
@@ -85,28 +87,17 @@ public abstract class PlayActivity extends AppCompatActivity {
 
     protected abstract void onEndDragons();
 
-    protected abstract void changeCurrentPlayer();
-
-    protected void showEndMessage(String title, String message) {
-//        new TTFancyGifDialog.Builder(SinglePlayerActivity.this)
-//                .setTitle(title)
-//                .setMessage(message)
-//                .setPositiveBtnText("Sair")
-//                .setPositiveBtnBackground("#004d40")
-//                .setNegativeBtnText("Reiniciar jogo")
-//                .setNegativeBtnBackground("#c1272d")
-//                .setGifResource(R.drawable.wallpaper)
-//                .isCancellable(true)
-//                .OnPositiveClicked(this::finish)
-//                .OnNegativeClicked(this::recreate)
-//                .build();
+    protected void showEndMessage(String message) {
+        new DialogEndGame(this)
+                .setMessage(message)
+                .show();
     }
 
     protected boolean hasSelected() {
         return dragons.stream().anyMatch(DragonModel::isSelected);
     }
 
-    protected boolean canSelect() {
+    private boolean canSelect() {
         return ((Long) dragons.stream().filter(dragonModel -> dragonModel.isSelected() && dragonModel.isVisible()).count()).intValue() < 3;
     }
 
@@ -137,14 +128,11 @@ public abstract class PlayActivity extends AppCompatActivity {
 
         mediaPlayer = MediaPlayer.create(this, music);
         mediaPlayer.start();
+        mediaPlayer.setLooping(false);
     }
 
     protected List<DragonModel> getDragonVisible(int limit) {
         return dragons.stream().filter(DragonModel::isVisible).limit(limit).collect(Collectors.toList());
-    }
-
-    protected final void setPlayerName(String playerName) {
-        player.setText(playerName);
     }
 
     @Override
@@ -152,9 +140,6 @@ public abstract class PlayActivity extends AppCompatActivity {
         super.onResume();
         if (!mediaPlayer.isPlaying()) {
             mediaPlayer.start();
-            if (!mediaPlayer.isLooping()) {
-                mediaPlayer.setLooping(true);
-            }
         }
     }
 
@@ -166,8 +151,4 @@ public abstract class PlayActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
 }

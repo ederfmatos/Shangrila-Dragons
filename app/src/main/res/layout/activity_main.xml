@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo2"
+    android:fitsSystemWindows="true"
     tools:context="com.spectron.dragoesdeshangrila.activities.MainActivity">
 
 
@@ -13,6 +14,7 @@
         android:id="@+id/appCompatImageView"
         android:layout_width="0dp"
         android:layout_height="200dp"
+        android:layout_marginTop="24dp"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

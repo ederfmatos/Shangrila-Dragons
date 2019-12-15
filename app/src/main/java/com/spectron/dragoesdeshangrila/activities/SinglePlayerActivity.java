@@ -10,26 +10,23 @@ import java.util.Objects;
 
 public class SinglePlayerActivity extends PlayActivity {
 
-    protected boolean isPlayerChance = true;
     private LevelEnum level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_singleplayer);
-
-        super.init();
+        super.init(getString(R.string.voce), getString(R.string.maquina));
 
         level = (LevelEnum) Objects.requireNonNull(getIntent().getExtras()).get("level");
     }
 
     @Override
     public void onClickButtonRemove(View view) {
-        if (!hasSelected() || !isPlayerChance) return;
+        if (!hasSelected() || !players.isFirstPlayer()) return;
         super.onClickButtonRemove(view);
 
-        isPlayerChance = false;
-        removeDragons();
+        super.removeDragons();
+        players.changePlayer();
 
         if (getQuantityDragonsVisible() > 0) {
             machineChance();
@@ -38,35 +35,41 @@ public class SinglePlayerActivity extends PlayActivity {
 
     @Override
     protected void onEndDragons() {
-        if (isPlayerChance) {
-            youLose();
-        } else {
+        if (players.isFirstPlayer()) {
             youWin();
+        } else {
+            youLose();
         }
     }
 
-    @Override
-    protected void changeCurrentPlayer() {
-        isPlayerChance = !isPlayerChance;
-    }
-
     private void machineChance() {
-        handler.postDelayed(() -> machineRemove(level.getAction().get(getQuantityDragonsVisible())), 1000);
+        wait(() -> {
+            int quantity = level.getAction().get(getQuantityDragonsVisible());
+            getDragonVisible(quantity).forEach(dragonModel -> dragonModel.setSelected(true));
+
+            wait(() -> {
+                this.removeDragons();
+
+                handler.postDelayed(() -> {
+                    players.changePlayer();
+                    super.onClickButtonRemove(null);
+                }, 400);
+            });
+
+        });
     }
 
-    private void machineRemove(int quantity) {
-        getDragonVisible(quantity).forEach(dragonModel -> dragonModel.setSelected(true));
-        handler.postDelayed(this::removeDragons, 1000);
-        isPlayerChance = true;
+    private void wait(Runnable runnable) {
+        handler.postDelayed(runnable, 1000);
     }
 
     private void youWin() {
-        showEndMessage("Você venceu", "Parabéns, você venceu");
+        showEndMessage(getString(R.string.parabens_voce_venceu));
         startWinnerMusic();
     }
 
     private void youLose() {
-        showEndMessage("Puxa vida", "Que pena, você perdeu");
+        showEndMessage(getString(R.string.voce_perdeu));
         startLoserMusic();
     }
 

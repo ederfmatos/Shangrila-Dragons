@@ -10,4 +10,10 @@
     <string name="jogador_2">Jogador 2</string>
     <string name="venceu">venceu!</string>
     <string name="vez_de">Vez de:</string>
+    <string name="voce_venceu">Você venceu</string>
+    <string name="parabens_voce_venceu">Parabéns, você venceu</string>
+    <string name="puxa_vida">Puxa vida</string>
+    <string name="voce_perdeu">Que pena, você perdeu</string>
+    <string name="voce">Você</string>
+    <string name="maquina">Máquina</string>
 </resources>

@@ -2,7 +2,6 @@ package com.spectron.dragoesdeshangrila.activities;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.spectron.dragoesdeshangrila.R;
 
@@ -12,44 +11,29 @@ import java.util.Objects;
 
 public class MultiPlayerActivity extends PlayActivity {
 
-    private List<String> players;
-    private boolean isChanceFirstPlayer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        List<String> players = Arrays.asList((String[]) Objects.requireNonNull(Objects.requireNonNull(getIntent().getExtras()).get("players")));
 
-        super.init();
-        players = Arrays.asList((String[]) Objects.requireNonNull(getIntent().getExtras().get("players")));
-        isChanceFirstPlayer = true;
-        setCurrentPlayer();
+        super.init(players.get(0), players.get(1));
     }
 
     @Override
     public void onClickButtonRemove(View view) {
-        super.onClickButtonRemove(view);
+        if(!super.hasSelected()) {
+            return;
+        }
 
-        removeDragons();
-        changeCurrentPlayer();
+        super.onClickButtonRemove(view);
+        super.removeDragons();
+        super.players.changePlayer();
     }
 
     @Override
     protected void onEndDragons() {
-        Toast.makeText(this, getCurrentPlayer() + " " + getString(R.string.venceu), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected void changeCurrentPlayer() {
-        isChanceFirstPlayer = !isChanceFirstPlayer;
-        setCurrentPlayer();
-    }
-
-    private String getCurrentPlayer() {
-        return players.get(isChanceFirstPlayer ? 0 : 1);
-    }
-
-    private void setCurrentPlayer() {
-        setPlayerName(getString(R.string.vez_de) + getCurrentPlayer());
+        super.startWinnerMusic();
+        showEndMessage(players.getCurrentPlayer() + " " + getString(R.string.venceu));
     }
 
 }
