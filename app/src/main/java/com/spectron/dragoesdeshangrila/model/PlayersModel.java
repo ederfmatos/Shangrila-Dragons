@@ -20,16 +20,8 @@ public class PlayersModel {
         changePlayer();
     }
 
-    public String getFirstPlayer() {
-        return firstPlayerName;
-    }
-
-    public String getSecondPlayer() {
-        return secondPlayerName;
-    }
-
     public String getCurrentPlayer() {
-        return isFirstPlayer ? getFirstPlayer() : getSecondPlayer();
+        return isFirstPlayer ? firstPlayerName : secondPlayerName;
     }
 
     public boolean isFirstPlayer() {

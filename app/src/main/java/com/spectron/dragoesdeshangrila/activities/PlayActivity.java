@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.spectron.dragoesdeshangrila.R;
 import com.spectron.dragoesdeshangrila.components.DialogEndGame;
+import com.spectron.dragoesdeshangrila.enumerations.MusicEnum;
 import com.spectron.dragoesdeshangrila.model.DragonModel;
 import com.spectron.dragoesdeshangrila.model.PlayersModel;
 
@@ -45,10 +46,11 @@ public abstract class PlayActivity extends AppCompatActivity {
     }
 
     protected final void init(String firstPlayerName, String secondPlayerName) {
-        startMusic(R.raw.fundojogo);
-        dragons = new ArrayList<>();
         players.setPlayers(firstPlayerName, secondPlayerName);
 
+        startMusic(MusicEnum.GAME.getMusic());
+
+        dragons = new ArrayList<>();
         for (int i = 1; i < 15; i++) {
             int id = getResources().getIdentifier("dragao" + i, "id", getPackageName());
             dragons.add(new DragonModel(findViewById(id)));
@@ -114,11 +116,11 @@ public abstract class PlayActivity extends AppCompatActivity {
     }
 
     protected void startLoserMusic() {
-        startMusic(R.raw.lose);
+        startMusic(MusicEnum.LOSE.getMusic());
     }
 
     protected void startWinnerMusic() {
-        startMusic(R.raw.winner);
+        startMusic(MusicEnum.WIN.getMusic());
     }
 
     private void startMusic(int music) {

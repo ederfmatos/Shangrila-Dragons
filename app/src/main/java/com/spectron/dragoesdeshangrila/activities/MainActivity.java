@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.spectron.dragoesdeshangrila.R;
 import com.spectron.dragoesdeshangrila.components.SpectronDialog;
 import com.spectron.dragoesdeshangrila.enumerations.LevelEnum;
+import com.spectron.dragoesdeshangrila.enumerations.MusicEnum;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().setFlags(FLAG_LAYOUT_NO_LIMITS, FLAG_LAYOUT_NO_LIMITS);
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.fundojogo);
+        mediaPlayer = MediaPlayer.create(this, MusicEnum.MENU.getMusic());
         mediaPlayer.start();
     }
 
