@@ -59,6 +59,13 @@ public class SinglePlayerActivity extends PlayActivity {
         });
     }
 
+    @Override
+    public void onDragonClick(View view) {
+        if(players.isFirstPlayer()) {
+            super.onDragonClick(view);
+        }
+    }
+
     private void wait(Runnable runnable) {
         handler.postDelayed(runnable, 1000);
     }
