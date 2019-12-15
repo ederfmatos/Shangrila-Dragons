@@ -14,16 +14,13 @@
         >
 
         <activity android:name=".activities.MultiPlayerActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            />
+            android:screenOrientation="portrait" />
+
         <activity android:name=".activities.SinglePlayerActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:screenOrientation="portrait" />
 
         <activity android:name=".activities.MainActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
