@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().setFlags(FLAG_LAYOUT_NO_LIMITS, FLAG_LAYOUT_NO_LIMITS);
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.fundomenu);
+        mediaPlayer = MediaPlayer.create(this, R.raw.fundojogo);
         mediaPlayer.start();
     }
 
@@ -74,4 +74,20 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer.stop();
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+        }
+    }
 }
