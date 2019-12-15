@@ -1,19 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Dragões de Shangrila</string>
-    <string name="selecione_o_nivel_da_partida">Selecione o nível de partida</string>
+
     <string name="dragoes_de_shangrila">Dragões de Shangrila</string>
-    <string name="dificil">Dificil</string>
-    <string name="facil">Facil</string>
-    <string name="selecione_um_nivel">Selecione um nivel</string>
-    <string name="digite_o_nome_dos_jogadores">Digite o nome dos jogadores</string>
+    <string name="digite_o_nome_dos_jogadores">Digite o nome dos jogadores</string>4
+
+    <string name="easy">Fácil</string>
+
+    <string name="hard">Difícil</string>
+
     <string name="jogador_1">Jogador 1</string>
     <string name="jogador_2">Jogador 2</string>
+
+    <string name="maquina">Máquina</string>
+    <string name="medium">Médio</string>
+    <string name="multiplayer">Dois jogadores</string>
+
+    <string name="parabens_voce_venceu">Parabéns, você venceu</string>
+    <string name="puxa_vida">Puxa vida</string>
+
+    <string name="reiniciar">Reiniciar</string>
+
+    <string name="sair">Sair</string>
+    <string name="selecione_o_nivel_da_partida">Selecione o nível de partida</string>
+    <string name="selecione_um_nivel">Selecione um nivel</string>
+    <string name="singleplayer">Um Jogador</string>
+    <string name="sobre">Sobre</string>
+
     <string name="venceu">venceu!</string>
     <string name="vez_de">Vez de:</string>
     <string name="voce_venceu">Você venceu</string>
-    <string name="parabens_voce_venceu">Parabéns, você venceu</string>
-    <string name="puxa_vida">Puxa vida</string>
     <string name="voce_perdeu">Que pena, você perdeu</string>
     <string name="voce">Você</string>
-    <string name="maquina">Máquina</string>
+
 </resources>

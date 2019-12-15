@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="330dp"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -58,13 +57,13 @@
                     android:id="@+id/buttonRestart"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Reiniciar" />
+                    android:text="@string/reiniciar" />
 
                 <Button
                     android:id="@+id/buttonClose"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Sair" />
+                    android:text="@string/sair" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

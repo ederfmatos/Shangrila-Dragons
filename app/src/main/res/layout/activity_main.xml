@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
         android:onClick="multiplayer"
-        android:text="Multiplayer"
+        android:text="@string/multiplayer"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="120dp"
         android:onClick="showAboutPage"
-        android:text="Sobre"
+        android:text="@string/sobre"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="72dp"
         android:onClick="singlePlayer"
-        android:text="SIngleplayer"
+        android:text="@string/singleplayer"
         app:layout_constraintBottom_toTopOf="@+id/buttonMultiPlayer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
