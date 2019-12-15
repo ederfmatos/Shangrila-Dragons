@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.spectron.dragoesdeshangrila.R;
+import com.spectron.dragoesdeshangrila.enumerations.LevelEnum;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,9 +40,9 @@ public class SpectronDialog extends Dialog {
     private String message;
 
     private Consumer<List<String>> onClick;
-    private Consumer<String> consumer;
+    private Consumer<LevelEnum> consumer;
 
-    private List<?> optionsSelect;
+    private List<LevelEnum> optionsSelect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class SpectronDialog extends Dialog {
             firstInput.setVisibility(View.GONE);
             secondInput.setVisibility(View.GONE);
 
-            final List<String> items = optionsSelect.stream().map(String::valueOf).collect(Collectors.toList());
+            final List<String> items = optionsSelect.stream().map(item -> context.getString(item.getName()).toUpperCase()).collect(Collectors.toList());
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
                     context,
                     android.R.layout.simple_list_item_1,
@@ -122,12 +123,12 @@ public class SpectronDialog extends Dialog {
         return this;
     }
 
-    public <T> SpectronDialog setOptionsSelect(T[] list) {
-        this.optionsSelect = Arrays.asList(list);
+    public SpectronDialog setOptionsSelect(List<LevelEnum> list) {
+        this.optionsSelect = list;
         return this;
     }
 
-    public SpectronDialog onSelect(Consumer<String> consumer) {
+    public SpectronDialog onSelect(Consumer<LevelEnum> consumer) {
         this.consumer = consumer;
         return this;
     }
@@ -142,7 +143,8 @@ public class SpectronDialog extends Dialog {
             if (onClick != null) {
                 onClick.accept(Arrays.asList(firstInput.getText().toString(), secondInput.getText().toString()));
             } else if (consumer != null) {
-                consumer.accept(spinner.getSelectedItem().toString());
+                int index = spinner.getSelectedItemPosition();
+                consumer.accept(optionsSelect.get(index));
             }
             dismiss();
         }

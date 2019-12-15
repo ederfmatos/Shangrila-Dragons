@@ -14,7 +14,6 @@ import com.spectron.dragoesdeshangrila.enumerations.MusicEnum;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import p32929.officeaboutlib.Others.OfficeAboutHelper;
 
@@ -50,12 +49,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void singlePlayer(View view) {
-        List<String> options = Arrays.stream(LevelEnum.values()).map(item -> getString(item.getName()).toUpperCase()).collect(Collectors.toList());
-
         new SpectronDialog(this)
                 .setMessage(getString(R.string.selecione_um_nivel))
-                .setOptionsSelect(options.toArray())
-                .onSelect((level) -> showActivity(false, LevelEnum.valueOf(level), null))
+                .setOptionsSelect(Arrays.asList(LevelEnum.values()))
+                .onSelect((level) -> showActivity(false, level, null))
                 .show();
     }
 
