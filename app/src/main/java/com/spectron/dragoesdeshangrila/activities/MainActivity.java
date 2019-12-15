@@ -39,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
         aboutPage.showAboutActivity();
     }
 
+    public void openBluetoothActivity(View view) {
+        startActivity(new Intent(this, BluetoothDevicesActivity.class));
+    }
+
     public void multiplayer(View view) {
         new SpectronDialog(this)
                 .setMessage(getString(R.string.digite_o_nome_dos_jogadores))
@@ -59,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private void showActivity(boolean isMultiplayer, LevelEnum level, List<String> players) {
         Class<? extends AppCompatActivity> clazz = SinglePlayerActivity.class;
 
-        if(isMultiplayer) {
+        if (isMultiplayer) {
             clazz = MultiPlayerActivity.class;
         }
 
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("isMultiplayer", false);
         intent.putExtra("level", level);
 
-        if(players != null) {
+        if (players != null) {
             intent.putExtra("players", players.toArray());
         }
 
