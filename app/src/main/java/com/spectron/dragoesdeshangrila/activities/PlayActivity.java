@@ -90,6 +90,7 @@ public abstract class PlayActivity extends AppCompatActivity {
     protected abstract void onEndDragons();
 
     protected void showEndMessage(String message) {
+        chronometer.stop();
         new DialogEndGame(this)
                 .setMessage(message)
                 .show();
