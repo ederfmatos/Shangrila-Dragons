@@ -46,9 +46,9 @@ public class DragonModel {
 
     private void toggleImage() {
         if (isSelected()) {
-            this.toggleBackground(R.drawable.dragaoverdeselecionado);
+            this.toggleBackground(R.drawable.dgselecionado);
         } else {
-            this.toggleBackground(R.drawable.dragaoverde);
+            this.toggleBackground(R.drawable.dg);
         }
     }
 
