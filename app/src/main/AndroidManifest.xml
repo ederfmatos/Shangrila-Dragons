@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.spectron.dragoesdeshangrila">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/wallpaper"
@@ -10,23 +12,28 @@
         android:roundIcon="@drawable/wallpaper"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning"
-        >
-
-        <activity android:name=".activities.MultiPlayerActivity"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity
+            android:name=".activities.MatchActivity"
+            android:label="@string/title_activity_match"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.SearchOnlinePlayerActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".activities.SinglePlayerActivity"
+        <activity
+            android:name=".activities.MultiPlayerActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".activities.MainActivity"
+        <activity
+            android:name=".activities.SinglePlayerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MainActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private void showActivity(boolean isMultiplayer, LevelEnum level, List<String> players) {
         Class<? extends AppCompatActivity> clazz = SinglePlayerActivity.class;
 
-        if(isMultiplayer) {
+        if (isMultiplayer) {
             clazz = MultiPlayerActivity.class;
         }
 
@@ -67,13 +67,17 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("isMultiplayer", false);
         intent.putExtra("level", level);
 
-        if(players != null) {
+        if (players != null) {
             intent.putExtra("players", players.toArray());
         }
 
         startActivity(intent);
 
         mediaPlayer.stop();
+    }
+
+    public void online(View view) {
+        startActivity(new Intent(MainActivity.this, SearchOnlinePlayerActivity.class));
     }
 
 

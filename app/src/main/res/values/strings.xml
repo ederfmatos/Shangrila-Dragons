@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="server_client_id">855727498118-epuajlpbbl2pqjrrkpk7584h8nnj1mpd.apps.googleusercontent.com</string>
+
     <string name="app_name">Dragões de Shangrila</string>
 
     <string name="dragoes_de_shangrila">Dragões de Shangrila</string>
@@ -32,5 +34,6 @@
     <string name="voce_venceu">Você venceu</string>
     <string name="voce_perdeu">Que pena, você perdeu</string>
     <string name="voce">Você</string>
+    <string name="title_activity_match">MatchActivity</string>
 
 </resources>
